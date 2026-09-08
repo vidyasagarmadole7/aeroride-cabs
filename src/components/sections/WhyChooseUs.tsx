@@ -1,107 +1,127 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { 
+  ShieldCheck, 
   Clock, 
   UserCheck, 
-  Sparkles, 
-  ShieldCheck, 
-  Headphones, 
   Plane, 
-  Timer, 
-  Car, 
-  CheckCircle2
+  Receipt, 
+  Headphones, 
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 
 export const WhyChooseUs: React.FC = () => {
-  const features = [
+  const pillars = [
     {
-      icon: Clock,
-      title: 'Guaranteed On-Time Pickup',
-      desc: 'Our chauffeur arrives at your doorstep 15 minutes before scheduled time. Zero anxiety of missing your departure flight.',
-      color: 'text-amber-600 bg-amber-50 border-amber-200'
+      num: '01',
+      title: 'On-Time, Every Time',
+      desc: 'Our chauffeur reports 15 minutes before scheduled departure. Zero flight-miss anxiety, guaranteed.'
     },
     {
-      icon: Plane,
-      title: 'Real-Time Flight Tracking',
-      desc: 'We monitor live airport radar. If your flight is delayed or lands early, driver pickup time is adjusted automatically with no extra cost.',
-      color: 'text-blue-600 bg-blue-50 border-blue-200'
+      num: '02',
+      title: 'Professionally Trained Chauffeurs',
+      desc: 'Formally suited, background-vetted chauffeurs trained in executive etiquette and defensive highway navigation.'
     },
     {
-      icon: Timer,
-      title: '60 Mins Free Waiting Time',
-      desc: 'Take your time clearing immigration, customs, and baggage claim. We include 1 hour of complimentary waiting from actual touchdown.',
-      color: 'text-emerald-600 bg-emerald-50 border-emerald-200'
+      num: '03',
+      title: 'Live Flight Monitoring',
+      desc: 'We monitor live airport radar. Early arrivals or delayed touch-downs are auto-adjusted with zero extra charges.'
     },
     {
-      icon: ShieldCheck,
-      title: '100% Transparent Flat Fares',
-      desc: 'No sudden midnight surge multipliers or rain surcharges. All state permits, fuel, tolls, and GST taxes are upfront and itemized.',
-      color: 'text-purple-600 bg-purple-50 border-purple-200'
+      num: '04',
+      title: 'Fixed, Transparent Fares',
+      desc: 'Zero surge multipliers, zero midnight premiums. Highway tolls, GST taxes, and airport permits are fully itemized.'
     },
     {
-      icon: UserCheck,
-      title: 'Verified Senior Chauffeurs',
-      desc: 'Background-verified, professionally uniformed chauffeurs trained in executive etiquette and defensive highway driving.',
-      color: 'text-cyan-600 bg-cyan-50 border-cyan-200'
+      num: '05',
+      title: '60-Minute Complimentary Waiting',
+      desc: 'Take your time clearing passport control, baggage claim, and customs. 1 full hour of grace time from touchdown.'
     },
     {
-      icon: Sparkles,
-      title: 'Clean & Sanitized Vehicles',
-      desc: 'Every vehicle undergoes multi-point safety checks, AC filter servicing, vacuum cleaning, and cabin sanitization before every trip.',
-      color: 'text-rose-600 bg-rose-50 border-rose-200'
-    },
-    {
-      icon: Headphones,
-      title: '24/7 Airport Support Desk',
-      desc: 'Dedicated round-the-clock helpdesk stationed near airport terminals to assist with gate coordination, route changes, or lost luggage.',
-      color: 'text-indigo-600 bg-indigo-50 border-indigo-200'
-    },
-    {
-      icon: Car,
-      title: 'Diverse Premium Fleet',
-      desc: 'From economical Prime Sedans to executive Toyota Innova Crysta SUVs, luxury Mercedes-Benz sedans, and 12-seater Tempo Travellers.',
-      color: 'text-amber-700 bg-amber-50 border-amber-200'
+      num: '06',
+      title: '24/7 Travel Assistance',
+      desc: 'Direct access to our 24/7 airport concierge operations desk for instant itinerary changes and gate coordination.'
     }
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200/80">
+    <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-2.5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            The AeroGlide Standard
-          </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight">
-            Why Discerning Travelers Choose Us
-          </h2>
-          <p className="text-slate-600 text-xs sm:text-base leading-relaxed">
-            Eliminate long taxi queues, unreliable ride cancellations, and hidden charges. We provide the gold standard in premium airport mobility.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: High-End Chauffeur Editorial Visual */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative h-[460px] sm:h-[540px] rounded-3xl overflow-hidden shadow-xl border border-slate-200">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=85"
+                alt="Executive Chauffeur holding car door"
+                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80';
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
 
-        {/* 8 Feature Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {features.map((item, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 hover:border-blue-400 hover:shadow-md transition-all duration-200 shadow-2xs space-y-3 flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold border ${item.color}`}>
-                  <item.icon className="w-5 h-5" />
+              {/* Floating Trust Card */}
+              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md rounded-2xl p-5 border border-white/40 shadow-lg text-slate-900">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-slate-950 text-amber-400 flex items-center justify-center font-black text-sm shrink-0">
+                    AG
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-slate-950">The AeroGlide Standard</h4>
+                    <p className="text-[11px] text-slate-600 font-medium">Over 500,000 corporate transfers completed with 99.4% on-time record.</p>
+                  </div>
                 </div>
-                <h3 className="text-sm sm:text-base font-bold text-slate-900">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                  {item.desc}
-                </p>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Right Column: Numbered Luxury Features */}
+          <div className="lg:col-span-7 space-y-8">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-[11px] font-bold uppercase tracking-wider">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                Uncompromising Excellence
+              </div>
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+                Why Leading Travelers Choose Us
+              </h2>
+              <p className="text-slate-600 text-xs sm:text-base leading-relaxed font-medium">
+                Eliminate unverified drivers, surge multipliers, and airport queue delays. We set the global standard for private executive travel.
+              </p>
+            </div>
+
+            {/* 6 Numbered Pillars Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+              {pillars.map((item) => (
+                <div key={item.num} className="space-y-2 border-t border-slate-200/80 pt-4">
+                  <div className="text-sm font-black text-amber-600 font-mono tracking-wider">
+                    {item.num}
+                  </div>
+                  <h3 className="text-sm sm:text-base font-bold text-slate-950">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-2">
+              <Link
+                href="/book"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-slate-950 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition shadow-xs tracking-wide"
+              >
+                <span>Reserve Your Chauffeur Today</span>
+                <ArrowRight className="w-4 h-4 text-amber-400" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

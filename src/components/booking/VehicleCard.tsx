@@ -5,12 +5,10 @@ import {
   Users, 
   Briefcase, 
   Wind, 
-  Wifi, 
   ShieldCheck, 
   Star, 
   Check, 
   Info, 
-  Clock, 
   ArrowRight,
   Sparkles,
   Plane
@@ -46,17 +44,16 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
 
   return (
     <div
-      className={`relative bg-white rounded-2xl border transition-all duration-200 overflow-hidden w-full ${
+      className={`relative bg-white rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden w-full ${
         isSelected
-          ? 'border-blue-600 ring-2 ring-blue-600/20 shadow-lg'
-          : 'border-slate-200/90 hover:border-blue-400 hover:shadow-md'
+          ? 'border-slate-950 ring-2 ring-slate-950/20 shadow-lg'
+          : 'border-slate-200/80 hover:border-slate-400 hover:shadow-md'
       }`}
     >
-      {/* Top Tag Badge */}
+      {/* Top Class Tag Badge */}
       {vehicle.tag && (
         <div className="absolute top-3 left-3 z-10">
-          <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-amber-400 text-slate-950 text-[10px] sm:text-xs font-black rounded-full uppercase tracking-wider shadow-xs flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-slate-950" />
+          <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-white/95 backdrop-blur-md text-slate-950 text-[10px] sm:text-[11px] font-black rounded-lg uppercase tracking-wider shadow-xs border border-slate-200">
             {vehicle.tag}
           </span>
         </div>
@@ -65,12 +62,15 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
       <div className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center">
         {/* Left: Car Image & Rating */}
         <div className="md:col-span-4 flex flex-col items-center">
-          <div className="relative w-full h-36 sm:h-40 rounded-xl overflow-hidden bg-slate-100 flex items-center justify-center">
+          <div className="relative w-full h-36 sm:h-44 rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 flex items-center justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={vehicle.image}
               alt={vehicle.name}
-              className="w-full h-full object-cover rounded-xl transform hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover object-center rounded-xl transform hover:scale-105 transition-transform duration-500"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80';
+              }}
             />
           </div>
 
@@ -90,7 +90,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
               <h3 className="text-base sm:text-lg font-black text-slate-950">{vehicle.name}</h3>
               {vehicle.ac && (
                 <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-1.5 py-0.5 rounded">
-                  AC
+                  Climate AC
                 </span>
               )}
             </div>
@@ -100,14 +100,14 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
           </div>
 
           {/* Capacity Badges */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-semibold text-slate-700">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 text-xs font-semibold text-slate-700">
             <div className="flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg">
-              <Users className="w-3.5 h-3.5 text-blue-600" />
-              <span>{vehicle.passengerCapacity} Pax</span>
+              <Users className="w-3.5 h-3.5 text-slate-600" />
+              <span>{vehicle.passengerCapacity} Guests</span>
             </div>
             <div className="flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg">
-              <Briefcase className="w-3.5 h-3.5 text-blue-600" />
-              <span>{vehicle.luggageCapacity} Bags</span>
+              <Briefcase className="w-3.5 h-3.5 text-slate-600" />
+              <span>{vehicle.luggageCapacity} Cases</span>
             </div>
           </div>
 
@@ -130,21 +130,21 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
         {/* Right: Fare, Tooltip & CTA */}
         <div className="md:col-span-3 flex flex-col justify-between border-t md:border-t-0 md:border-l border-slate-100 pt-3.5 md:pt-0 md:pl-5 space-y-3">
           <div className="text-left md:text-right">
-            <div className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">All-Inclusive Fare</div>
+            <div className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Fixed Flat Fare</div>
             <div className="flex items-baseline md:justify-end gap-1.5">
               <span className="text-2xl sm:text-3xl font-black text-slate-950">
                 {formatCurrency(fareDetails.total, currency)}
               </span>
               <span className="text-xs text-slate-400 font-semibold line-through">
-                {formatCurrency(fareDetails.total * 1.2, currency)}
+                {formatCurrency(fareDetails.total * 1.15, currency)}
               </span>
             </div>
             <div className="text-[11px] text-emerald-700 font-bold flex items-center md:justify-end gap-1">
-              <span>Tolls & Taxes Included</span>
+              <span>All Tolls & Taxes Included</span>
               <button
                 type="button"
                 onClick={() => setShowFareBreakdown(!showFareBreakdown)}
-                className="text-slate-400 hover:text-blue-600 cursor-pointer"
+                className="text-slate-400 hover:text-slate-950 cursor-pointer"
                 aria-label="Fare breakdown details"
               >
                 <Info className="w-3.5 h-3.5" />
@@ -157,7 +157,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
             onClick={() => onSelect(vehicle)}
             className={`w-full min-h-[46px] py-2.5 sm:py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
               isSelected
-                ? 'bg-blue-600 text-white shadow-md'
+                ? 'bg-slate-950 text-white shadow-md'
                 : 'bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-xs'
             }`}
           >
@@ -168,7 +168,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
               </>
             ) : (
               <>
-                <span>Select Cab</span>
+                <span>Reserve Chauffeur</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
@@ -176,30 +176,30 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
         </div>
       </div>
 
-      {/* Fare Breakdown Dropdown */}
+      {/* Fare Breakdown Tooltip */}
       {showFareBreakdown && (
         <div className="bg-slate-50 border-t border-slate-200 p-4 text-xs text-slate-700 animate-in fade-in duration-150">
-          <div className="font-bold text-slate-900 mb-2">Itemized Fare Breakdown</div>
+          <div className="font-bold text-slate-900 mb-2">Itemized Tariff Breakdown</div>
           <div className="space-y-1.5">
             <div className="flex justify-between">
-              <span>Base Fare & Fuel ({distanceKm} km)</span>
+              <span>Base Chauffeur Rate & Fuel ({distanceKm} km)</span>
               <span className="font-semibold text-slate-900">{formatCurrency(fareDetails.baseFare, currency)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Airport Parking & Entry Tolls</span>
+              <span>Airport Terminal Entry & Express Tolls</span>
               <span className="font-semibold text-slate-900">{formatCurrency(fareDetails.airportFee, currency)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Government GST / Taxes (5%)</span>
+              <span>GST / State Transport Taxes (5%)</span>
               <span className="font-semibold text-slate-900">{formatCurrency(fareDetails.taxes, currency)}</span>
             </div>
             <div className="pt-2 border-t border-slate-200 flex justify-between font-black text-slate-950">
-              <span>Total Guaranteed Fare</span>
+              <span>Total Guaranteed Fixed Tariff</span>
               <span>{formatCurrency(fareDetails.total, currency)}</span>
             </div>
           </div>
-          <p className="text-[10px] text-slate-500 mt-2">
-            No hidden fees. Includes 60 minutes free airport touchdown waiting time.
+          <p className="text-[10px] text-slate-500 mt-2 font-medium">
+            Zero surge pricing. Includes 60 minutes complimentary touchdown waiting time.
           </p>
         </div>
       )}
