@@ -5,115 +5,106 @@ import Link from 'next/link';
 import { 
   Users, 
   Briefcase, 
-  Star, 
+  Wind, 
   ArrowRight, 
   ShieldCheck, 
   Sparkles,
-  Wind,
-  Wifi
+  Check
 } from 'lucide-react';
-import { VEHICLES } from '@/data/vehicles';
-import { formatCurrency } from '@/lib/utils';
+import { SITE_CONFIG } from '@/config/siteConfig';
+import { formatINR } from '@/lib/fareCalculator';
 
 export const FleetSection: React.FC = () => {
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-[#FAFBFD] border-b border-slate-200/70">
+    <section id="fleet" className="py-16 sm:py-20 lg:py-24 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-[11px] font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              Chauffeur Fleet Showcase
+              Airport Fleet Showcase
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-              Travel in the Right Class
+              Choose the Right Vehicle Class
             </h2>
             <p className="text-slate-600 text-xs sm:text-base leading-relaxed font-medium">
-              Every vehicle in our executive fleet is thoroughly detailed, daily sanitized, and driven by a senior professional chauffeur.
+              From economical airport Sedans to executive Innova Crysta MUVs and luxury German chauffeur cars.
             </p>
           </div>
 
           <Link
             href="/book"
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-950 hover:text-amber-600 transition group self-start md:self-auto shrink-0 pb-1"
+            className="inline-flex items-center gap-2 text-xs font-bold text-blue-700 hover:text-blue-900 transition group self-start md:self-auto shrink-0 pb-1"
           >
-            <span>Compare All Vehicle Classes</span>
+            <span>View All Fleet Options</span>
             <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        {/* 6-Card Executive Fleet Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {VEHICLES.map((vehicle) => (
+        {/* 4-Card Vehicle Showcase Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SITE_CONFIG.vehicles.map((v) => (
             <div
-              key={vehicle.id}
-              className="group bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 overflow-hidden hover:border-slate-400 hover:shadow-lg transition-all duration-300 shadow-2xs flex flex-col justify-between"
+              key={v.id}
+              className="group bg-white rounded-2xl sm:rounded-3xl border border-slate-200 overflow-hidden hover:border-blue-400 hover:shadow-lg transition-all duration-300 shadow-2xs flex flex-col justify-between"
             >
               <div>
-                {/* Vehicle Image with Aspect Ratio & Tag */}
-                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100">
+                {/* Vehicle Image */}
+                <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={vehicle.image}
-                    alt={vehicle.name}
+                    src={v.image}
+                    alt={v.name}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80';
+                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80';
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
 
-                  {/* Top Badge */}
-                  {vehicle.tag && (
-                    <div className="absolute top-3.5 left-3.5 z-10">
-                      <span className="px-2.5 py-1 bg-white/95 backdrop-blur-md text-slate-950 text-[10px] font-black rounded-lg uppercase tracking-wider shadow-xs">
-                        {vehicle.tag}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Rating Tag */}
-                  <div className="absolute bottom-3 right-3 z-10 bg-slate-950/80 backdrop-blur-md text-white px-2.5 py-0.5 rounded-lg text-xs font-bold flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                    <span>{vehicle.rating}</span>
+                  {/* Badge */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="px-2.5 py-0.5 bg-white/95 backdrop-blur-md text-slate-950 text-[10px] font-black rounded-lg uppercase tracking-wider shadow-xs">
+                      {v.tag}
+                    </span>
                   </div>
                 </div>
 
                 {/* Card Body */}
-                <div className="p-5 sm:p-6 space-y-4">
+                <div className="p-5 space-y-3.5">
                   <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-950 tracking-tight">
-                      {vehicle.name}
+                    <h3 className="text-base sm:text-lg font-black text-slate-950">
+                      {v.name}
                     </h3>
                     <p className="text-xs text-slate-500 font-medium mt-0.5 truncate">
-                      {vehicle.models}
+                      {v.models}
                     </p>
                   </div>
 
-                  {/* Capacity Badges */}
-                  <div className="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
+                  {/* Capacities */}
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-slate-700 font-semibold">
                     <div className="flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg">
-                      <Users className="w-3.5 h-3.5 text-slate-600" />
-                      <span>{vehicle.passengerCapacity} Guests</span>
+                      <Users className="w-3.5 h-3.5 text-blue-600" />
+                      <span>{v.passengerCapacity} Guests</span>
                     </div>
                     <div className="flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg">
-                      <Briefcase className="w-3.5 h-3.5 text-slate-600" />
-                      <span>{vehicle.luggageCapacity} Cases</span>
+                      <Briefcase className="w-3.5 h-3.5 text-blue-600" />
+                      <span>{v.luggageCapacity} Bags</span>
                     </div>
-                    {vehicle.ac && (
+                    {v.ac && (
                       <div className="flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg">
-                        <Wind className="w-3.5 h-3.5 text-slate-600" />
-                        <span>Climate AC</span>
+                        <Wind className="w-3.5 h-3.5 text-blue-600" />
+                        <span>AC</span>
                       </div>
                     )}
                   </div>
 
-                  {/* Bullet Highlights */}
+                  {/* Feature Highlights */}
                   <ul className="space-y-1.5 pt-1 border-t border-slate-100">
-                    {vehicle.features.slice(0, 3).map((feat, idx) => (
+                    {v.features.map((feat, idx) => (
                       <li key={idx} className="flex items-start gap-1.5 text-xs text-slate-600 font-medium">
-                        <span className="text-emerald-600 font-bold">✓</span>
+                        <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                         <span className="truncate">{feat}</span>
                       </li>
                     ))}
@@ -121,20 +112,18 @@ export const FleetSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Card Footer: Price & CTA */}
-              <div className="p-5 sm:p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-2">
+              {/* Card Footer: Starting Fare & BOOK NOW */}
+              <div className="p-5 pt-0 border-t border-slate-100 mt-2 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] uppercase font-bold text-slate-400">All-Inclusive From</div>
-                  <div className="text-xl sm:text-2xl font-black text-slate-950">
-                    {formatCurrency(vehicle.baseFare, 'USD')}
-                  </div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Starting At</span>
+                  <span className="text-xl font-black text-slate-950">{formatINR(v.baseFare)}</span>
                 </div>
 
                 <Link
-                  href={`/book?cat=${vehicle.category}`}
-                  className="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-bold transition shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                  href={`/book?cat=${v.category}`}
+                  className="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-black transition shadow-xs flex items-center gap-1.5 uppercase tracking-wide cursor-pointer"
                 >
-                  <span>Book Class</span>
+                  <span>BOOK NOW</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

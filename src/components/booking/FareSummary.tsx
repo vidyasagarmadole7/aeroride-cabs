@@ -57,7 +57,7 @@ export const FareSummary: React.FC<FareSummaryProps> = ({
   onPaymentModeChange,
   discountAmount,
   onApplyPromo,
-  currency = 'USD'
+  currency = 'INR'
 }) => {
   const [promoInput, setPromoInput] = useState('');
   const [promoError, setPromoError] = useState('');
@@ -97,7 +97,7 @@ export const FareSummary: React.FC<FareSummaryProps> = ({
       setAppliedPromo(code);
       setPromoError('');
     } else if (code === 'AERO100' || code === 'WELCOME20') {
-      const discount = 8;
+      const discount = 150;
       onApplyPromo(code, discount);
       setAppliedPromo(code);
       setPromoError('');

@@ -5,17 +5,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrency(amount: number, currency: 'USD' | 'INR' | 'EUR' | 'GBP' = 'USD'): string {
+export function formatCurrency(amount: number, currency: 'USD' | 'INR' | 'EUR' | 'GBP' = 'INR'): string {
   switch (currency) {
     case 'INR':
-      return `₹${Math.round(amount * 82).toLocaleString('en-IN')}`;
+      return `₹${Math.round(amount).toLocaleString('en-IN')}`;
     case 'EUR':
-      return `€${(amount * 0.92).toFixed(0)}`;
+      return `€${Math.round(amount / 90).toLocaleString()}`;
     case 'GBP':
-      return `£${(amount * 0.79).toFixed(0)}`;
+      return `£${Math.round(amount / 105).toLocaleString()}`;
     case 'USD':
+      return `$${Math.round(amount / 80).toLocaleString()}`;
     default:
-      return `$${amount.toFixed(0)}`;
+      return `₹${Math.round(amount).toLocaleString('en-IN')}`;
   }
 }
 
@@ -31,14 +32,14 @@ export function calculateTripFare(
     tripFare = tripFare * 1.85; // 15% discount on return leg
   }
   if (extraServices.meetAndGreet) {
-    tripFare += 8; // Meet & greet fee
+    tripFare += 299; // Meet & greet fee INR
   }
   if (extraServices.childSeat) {
-    tripFare += 6; // Child seat fee
+    tripFare += 199; // Child seat fee INR
   }
 
   const taxes = Math.round(tripFare * 0.05); // 5% GST/Tax
-  const airportFee = 4; // Airport entry/toll fee
+  const airportFee = 150; // Airport entry/toll fee INR
   const total = Math.round(tripFare + taxes + airportFee);
 
   return {

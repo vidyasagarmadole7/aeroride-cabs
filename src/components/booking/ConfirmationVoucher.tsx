@@ -32,7 +32,7 @@ interface ConfirmationVoucherProps {
 
 export const ConfirmationVoucher: React.FC<ConfirmationVoucherProps> = ({
   booking,
-  currency = 'USD'
+  currency = 'INR'
 }) => {
   useEffect(() => {
     try {

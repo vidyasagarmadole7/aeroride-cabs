@@ -1,6 +1,6 @@
-export type TripType = 'pickup' | 'drop' | 'roundtrip' | 'hourly';
+export type TripType = 'pickup' | 'drop' | 'roundtrip' | 'outstation' | 'hourly';
 
-export type VehicleCategory = 'all' | 'sedan' | 'suv' | 'luxury' | 'tempo' | 'ev';
+export type VehicleCategory = 'all' | 'sedan' | 'suv' | 'premium' | 'luxury' | 'tempo' | 'ev';
 
 export interface Airport {
   id: string;

@@ -4,6 +4,8 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { MobileBottomBar } from '@/components/layout/MobileBottomBar';
+import { FloatingActions } from '@/components/layout/FloatingActions';
+import { SITE_CONFIG } from '@/config/siteConfig';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: '--font-sans',
@@ -19,27 +21,28 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#0A1128',
+  themeColor: '#0B1B3D',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://aeroglidecabs.com'),
+  metadataBase: new URL('https://vidyasagarmadole7.github.io/aeroride-cabs/'),
   title: {
-    default: 'AeroGlide Cabs | Executive Airport Transfers & Chauffeur Service',
-    template: '%s | AeroGlide Executive Chauffeur'
+    default: 'AeroGlide Cabs | Reliable Airport Taxi & Chauffeur Services',
+    template: '%s | AeroGlide Cabs'
   },
-  description: 'Pre-book guaranteed luxury airport transfers with live flight radar tracking, 60 minutes complimentary waiting, suited executive chauffeurs, and upfront fixed flat fares.',
+  description: 'Book reliable airport transfers, airport pickup and drop, outstation cabs, corporate travel and hourly chauffeur services with AeroGlide Cabs.',
   keywords: [
-    'airport transfer',
-    'executive airport taxi',
-    'luxury airport chauffeur',
+    'airport cab',
+    'airport taxi booking',
+    'airport pickup cab',
+    'airport drop taxi',
+    'outstation cabs',
     'corporate airport transfer',
-    'flight tracking airport cab',
-    'black car airport service',
-    'first class airport transfer'
+    'hourly chauffeur',
+    'flight tracking cab'
   ],
   authors: [{ name: 'AeroGlide Mobility Solutions' }],
   creator: 'AeroGlide Cabs',
@@ -47,23 +50,14 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    }
   },
   openGraph: {
-    title: 'AeroGlide Cabs - Premium Airport Transfers & Executive Chauffeurs',
-    description: 'Guaranteed on-time executive airport transfers across 50+ global aviation hubs with live flight monitoring and transparent flat tariffs.',
-    url: 'https://aeroglidecabs.com',
+    title: 'AeroGlide Cabs - Reliable Airport Taxi & Chauffeur Services',
+    description: 'Guaranteed on-time airport pickups & drops with flight tracking and flat fares across 25+ Indian airport hubs.',
+    url: 'https://vidyasagarmadole7.github.io/aeroride-cabs/',
     siteName: 'AeroGlide Cabs',
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'AeroGlide Cabs - Executive Airport Transfers',
-    description: 'Guaranteed on-time airport pickups & drops with flight tracking and transparent flat fares.',
   }
 };
 
@@ -72,31 +66,45 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // LocalBusiness Schema for SEO
-  const localBusinessSchema = {
+  // LocalBusiness & TaxiService JSON-LD Schema for SEO
+  const structuredDataSchema = {
     '@context': 'https://schema.org',
     '@type': 'TaxiService',
     name: 'AeroGlide Cabs',
-    image: 'https://aeroglidecabs.com/og-image.jpg',
-    telephone: '+1-800-456-2376',
-    url: 'https://aeroglidecabs.com',
-    priceRange: '$$$',
+    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80',
+    telephone: SITE_CONFIG.phone,
+    url: 'https://vidyasagarmadole7.github.io/aeroride-cabs/',
+    priceRange: '₹₹',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Terminal 3 Aviation Boulevard, Aerocity',
+      addressLocality: 'New Delhi',
+      postalCode: '110037',
+      addressCountry: 'IN'
+    },
     areaServed: [
-      { '@type': 'Country', name: 'India' },
-      { '@type': 'Country', name: 'United Arab Emirates' },
-      { '@type': 'Country', name: 'United Kingdom' },
-      { '@type': 'Country', name: 'United States' }
+      { '@type': 'City', name: 'Pune' },
+      { '@type': 'City', name: 'Mumbai' },
+      { '@type': 'City', name: 'Delhi' },
+      { '@type': 'City', name: 'Bengaluru' },
+      { '@type': 'City', name: 'Hyderabad' },
+      { '@type': 'City', name: 'Chennai' },
+      { '@type': 'City', name: 'Kolkata' },
+      { '@type': 'City', name: 'Ahmedabad' },
+      { '@type': 'City', name: 'Goa' },
+      { '@type': 'City', name: 'Jaipur' }
     ],
     serviceType: [
-      'Executive Airport Pickup Transfer',
-      'Airport Curbside Departure Chauffeur',
+      'Airport Pickup Cab Transfer',
+      'Airport Curbside Drop Taxi',
       'Round Trip Airport Chauffeur',
-      'Corporate Airport Mobility Solutions',
+      'Outstation Airport Cabs',
+      'Corporate Travel Mobility Solutions',
       'Hourly Chauffeur Drive'
     ],
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '4.95',
+      ratingValue: '4.92',
       reviewCount: '52840'
     }
   };
@@ -109,10 +117,10 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredDataSchema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-[#FBFBFC] text-[#0A1128] pb-20 lg:pb-0 selection:bg-amber-100 selection:text-amber-900">
+      <body className="min-h-full flex flex-col font-sans bg-white text-slate-900 pb-20 lg:pb-0 selection:bg-blue-100 selection:text-blue-900">
         {/* Sticky Header */}
         <Header />
 
@@ -121,6 +129,9 @@ export default function RootLayout({
 
         {/* Multi-column Footer */}
         <Footer />
+
+        {/* Floating Quick Action Buttons (WhatsApp & Call) */}
+        <FloatingActions />
 
         {/* Mobile Sticky Action Bar */}
         <MobileBottomBar />

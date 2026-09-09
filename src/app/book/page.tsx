@@ -220,7 +220,7 @@ function BookingFlowContent() {
         {editSearchOpen && currentStep <= 3 && (
           <div className="mb-8 animate-in fade-in zoom-in-95 duration-200 w-full">
             <BookingWidget
-              initialTripType={bookingState.tripType}
+              initialTab={bookingState.tripType as any}
               initialAirportCode={bookingState.airport?.code}
               onSearch={(params) => {
                 const updatedAirport = AIRPORTS.find(a => a.code === params.airportCode) || AIRPORTS[0];

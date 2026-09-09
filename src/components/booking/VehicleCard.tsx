@@ -31,7 +31,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
   distanceKm = 25,
   isRoundtrip = false,
   onSelect,
-  currency = 'USD'
+  currency = 'INR'
 }) => {
   const [showFareBreakdown, setShowFareBreakdown] = useState(false);
 
